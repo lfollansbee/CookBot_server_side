@@ -34,7 +34,7 @@ router.get('/search', function(req, res, next){
 
 router.get('/recipeId', function(req, res, next){
   var query = parseInt(req.query.id)
-  console.log("id: ", query);
+  // console.log("id: ", query);
   var recipeRequest = {
     method: 'GET',
     url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/' + query + '/information',
