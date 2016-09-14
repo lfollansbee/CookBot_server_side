@@ -23,7 +23,7 @@ router.get('/search', function(req, res, next){
     }
   };
   request(options, function (error, response, body) {
-    response.addHeader("Access-Control-Allow-Origin", "*");
+    // response.addHeader("Access-Control-Allow-Origin", "*");
     if (error) throw new Error(error);
     // console.log(body);
     if(!error && response.statusCode == 200){
@@ -45,7 +45,7 @@ router.get('/recipeId', function(req, res, next){
     }
   };
   request(recipeRequest, function (error, response, body) {
-    response.addHeader("Access-Control-Allow-Origin", "*");
+    // response.addHeader("Access-Control-Allow-Origin", "*");
     if (error) throw new Error(error);
     if(!error && response.statusCode == 200){
       var parsed = JSON.parse(body);
@@ -65,7 +65,7 @@ router.get('/recipeInstructions', function(req, res, next){
     }
   };
   request(recipeInstructions, function (error, response, body) {
-    response.addHeader("Access-Control-Allow-Origin", "*");
+    // response.addHeader("Access-Control-Allow-Origin", "*");
     if (error) throw new Error(error);
     if(!error && response.statusCode == 200){
       var parsed = JSON.parse(body);
@@ -73,10 +73,6 @@ router.get('/recipeInstructions', function(req, res, next){
     }
   });
 })
-
-
-
-
 
 router.get('/search/fridge', function(req, res, next){
   var strings = JSON.stringify(req.query.query)

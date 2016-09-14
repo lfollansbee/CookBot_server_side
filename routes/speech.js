@@ -21,7 +21,10 @@ router.get('/speech', function(req, res, next){
   };
 
   // Pipe the synthesized text to a file.
-  text_to_speech.synthesize(params).pipe(fs.createWriteStream('hello_world.wav'));
+  // text_to_speech.synthesize(params).pipe(fs.createWriteStream('hello_world.wav'));
+  var transcript = text_to_speech.synthesize(params)
+
+  transcript.pipe(res)
 })
 
 
