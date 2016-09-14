@@ -52,6 +52,29 @@ router.get('/recipeId', function(req, res, next){
   });
 })
 
+router.get('/recipeInstructions', function(req, res, next){
+  var query = parseInt(req.query.id)
+  var recipeInstructions = {
+    method: 'GET',
+    url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/" + query + "/analyzedInstructions",
+    headers:{
+      'cache-control': 'no-cache',
+      'x-mashape-key': process.env.key
+    }
+  };
+  request(recipeInstructions, function (error, response, body) {
+    if (error) throw new Error(error);
+    if(!error && response.statusCode == 200){
+      var parsed = JSON.parse(body);
+      res.json(parsed);
+    }
+  });
+})
+
+
+
+
+
 router.get('/search/fridge', function(req, res, next){
   var strings = JSON.stringify(req.query.query)
   // console.log(strings);
