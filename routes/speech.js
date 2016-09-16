@@ -6,9 +6,9 @@ var watson = require('watson-developer-cloud');
 var fs = require('fs');
 
 
-router.get('/speech', function(req, res, next){
-  console.log("request: ", req.query);
-  var text = req.query.text;
+router.get('/:text', function(req, res, next){
+  console.log("request: ", req.params);
+  var text = req.params.text;
   var text_to_speech = watson.text_to_speech({
     username: process.env.watson_username,
     password: process.env.watson_password,
@@ -17,7 +17,7 @@ router.get('/speech', function(req, res, next){
   var params = {
     text: text,
     voice: 'en-US_AllisonVoice',
-    accept: 'audio/wav'
+    accept: 'audio/ogg'
   };
 
   // Pipe the synthesized text to a file.
@@ -26,7 +26,5 @@ router.get('/speech', function(req, res, next){
 
   transcript.pipe(res)
 })
-
-
 
 module.exports = router;

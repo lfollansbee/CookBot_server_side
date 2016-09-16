@@ -90,7 +90,7 @@ router.get('/search/fridge', function(req, res, next){
     }
   };
   request(options, function (error, response, body) {
-    response.addHeader("Access-Control-Allow-Origin", "*");
+    // response.addHeader("Access-Control-Allow-Origin", "*");
     if (error) throw new Error(error);
     // console.log(body);
     if(!error && response.statusCode == 200){
