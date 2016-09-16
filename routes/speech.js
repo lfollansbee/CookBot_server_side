@@ -16,7 +16,7 @@ router.get('/:text', function(req, res, next){
   });
   var params = {
     text: text,
-    voice: 'en-US_AllisonVoice',
+    voice: 'en-US_LisaVoice',
     accept: 'audio/ogg'
   };
 
