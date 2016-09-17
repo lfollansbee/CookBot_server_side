@@ -2,6 +2,8 @@ require('dotenv').config();
 var express = require('express');
 var router = express.Router();
 var request = require('request');
+var db = require('../db/queries');
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -19,11 +21,10 @@ router.get('/search', function(req, res, next){
     qs: req.query,
     headers:{
       'cache-control': 'no-cache',
-      'x-mashape-key': process.env.key
+      'x-mashape-key': process.env.production_key
     }
   };
   request(options, function (error, response, body) {
-    // response.addHeader("Access-Control-Allow-Origin", "*");
     if (error) throw new Error(error);
     // console.log(body);
     if(!error && response.statusCode == 200){
@@ -41,11 +42,10 @@ router.get('/recipeId', function(req, res, next){
     url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/' + query + '/information',
     headers:{
       'cache-control': 'no-cache',
-      'x-mashape-key': process.env.key
+      'x-mashape-key': process.env.production_key
     }
   };
   request(recipeRequest, function (error, response, body) {
-    // response.addHeader("Access-Control-Allow-Origin", "*");
     if (error) throw new Error(error);
     if(!error && response.statusCode == 200){
       var parsed = JSON.parse(body);
@@ -61,11 +61,10 @@ router.get('/recipeInstructions', function(req, res, next){
     url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/" + query + "/analyzedInstructions",
     headers:{
       'cache-control': 'no-cache',
-      'x-mashape-key': process.env.key
+      'x-mashape-key': process.env.production_key
     }
   };
   request(recipeInstructions, function (error, response, body) {
-    // response.addHeader("Access-Control-Allow-Origin", "*");
     if (error) throw new Error(error);
     if(!error && response.statusCode == 200){
       var parsed = JSON.parse(body);
@@ -86,11 +85,10 @@ router.get('/search/fridge', function(req, res, next){
     },
     headers:{
       'cache-control': 'no-cache',
-      'x-mashape-key': process.env.key
+      'x-mashape-key': process.env.production_key
     }
   };
   request(options, function (error, response, body) {
-    // response.addHeader("Access-Control-Allow-Origin", "*");
     if (error) throw new Error(error);
     // console.log(body);
     if(!error && response.statusCode == 200){
@@ -100,6 +98,12 @@ router.get('/search/fridge', function(req, res, next){
   });
 })
 
-
+router.get('/saved', function(req, res, next){
+  db.getSavedRecipes()
+  .then(function(data){
+    console.log(data);
+    res.json(data)
+  })
+})
 
 module.exports = router;
