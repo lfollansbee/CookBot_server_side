@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').load();
 var express = require('express');
 var router = express.Router();
 var request = require('request');
