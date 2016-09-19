@@ -1,4 +1,4 @@
-require('dotenv').load();
+require('dotenv').config();
 var express = require('express');
 var router = express.Router();
 var request = require('request');
@@ -21,7 +21,7 @@ router.get('/search', function(req, res, next){
     qs: req.query,
     headers:{
       'cache-control': 'no-cache',
-      'x-mashape-key': process.env.PRODUCTION_KEY
+      'x-mashape-key': process.env.TESTING_KEY
     }
   };
   request(options, function (error, response, body) {
@@ -30,6 +30,8 @@ router.get('/search', function(req, res, next){
     if(!error && response.statusCode == 200){
       var parsed = JSON.parse(body);
       res.json(parsed);
+    }else{
+      res.json({error, response})
     }
   });
 })
@@ -42,7 +44,7 @@ router.get('/recipeId', function(req, res, next){
     url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/' + query + '/information',
     headers:{
       'cache-control': 'no-cache',
-      'x-mashape-key': process.env.PRODUCTION_KEY
+      'x-mashape-key': process.env.TESTING_KEY
     }
   };
   request(recipeRequest, function (error, response, body) {
@@ -61,7 +63,7 @@ router.get('/recipeInstructions', function(req, res, next){
     url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/" + query + "/analyzedInstructions",
     headers:{
       'cache-control': 'no-cache',
-      'x-mashape-key': process.env.PRODUCTION_KEY
+      'x-mashape-key': process.env.TESTING_KEY
     }
   };
   request(recipeInstructions, function (error, response, body) {
@@ -81,11 +83,11 @@ router.get('/search/fridge', function(req, res, next){
     url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients',
     qs: {
       ingredients: strings,
-      number: 10
+      number: 12
     },
     headers:{
       'cache-control': 'no-cache',
-      'x-mashape-key': process.env.PRODUCTION_KEY
+      'x-mashape-key': process.env.TESTING_KEY
     }
   };
   request(options, function (error, response, body) {
