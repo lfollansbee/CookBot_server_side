@@ -7,7 +7,7 @@ var fs = require('fs');
 
 
 router.get('/:text', function(req, res, next){
-  console.log("request: ", req.params);
+  // console.log("request: ", req.params);
   var text = req.params.text;
   var text_to_speech = watson.text_to_speech({
     username: process.env.watson_username,
@@ -21,7 +21,6 @@ router.get('/:text', function(req, res, next){
   };
 
   // Pipe the synthesized text to a file.
-  // text_to_speech.synthesize(params).pipe(fs.createWriteStream('hello_world.wav'));
   var transcript = text_to_speech.synthesize(params)
 
   transcript.pipe(res)
