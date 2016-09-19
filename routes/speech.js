@@ -10,8 +10,8 @@ router.get('/:text', function(req, res, next){
   // console.log("request: ", req.params);
   var text = req.params.text;
   var text_to_speech = watson.text_to_speech({
-    username: process.env.watson_username,
-    password: process.env.watson_password,
+    username: process.env.WATSON_USERNAME,
+    password: process.env.WATSON_PASSWORD,
     version: 'v1'
   });
   var params = {

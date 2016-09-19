@@ -100,12 +100,12 @@ router.get('/search/fridge', function(req, res, next){
   });
 })
 
-router.get('/saved', function(req, res, next){
-  db.getSavedRecipes()
-  .then(function(data){
-    // console.log(data);
-    res.json(data)
-  })
-})
+// router.get('/saved', function(req, res, next){
+//   db.getSavedRecipes()
+//   .then(function(data){
+//     // console.log(data);
+//     res.json(data)
+//   })
+// })
 
 module.exports = router;
