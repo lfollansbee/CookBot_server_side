@@ -5,16 +5,6 @@ var request = require('request');
 var db = require('../db/queries');
 
 
-
-router.get('/', function(req, res, next){
-  db.getSavedRecipeTitles()
-  .then(function(data){
-    // console.log(data);
-    res.json(data)
-  })
-})
-
-
 router.post('/add', function(req, res, next){
   var object = req.query
   db.addNewRecipe(object)
@@ -23,6 +13,22 @@ router.post('/add', function(req, res, next){
   })
 })
 
+router.post('/addInstructions', function(req, res, next){
+  // console.log(req.query);
+  var steps = req.query
+  db.addInstructions(steps)
+  .then(function(){
+    res.json("very nice")
+  })
+})
+
+router.get('/', function(req, res, next){
+  db.getSavedRecipeTitles()
+  .then(function(data){
+    // console.log(data);
+    res.json(data)
+  })
+})
 
 router.get('/:id', function(req, res, next){
   console.log(req.params);

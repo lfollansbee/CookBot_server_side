@@ -21,7 +21,6 @@ module.exports = {
       cookingMinutes: rec.cookingMinutes,
       dairyFree: rec.dairyFree,
       extendedIngredients: JSON.stringify(ingredients),
-      extendedInstructions: JSON.stringify(['']),
       glutenFree: rec.glutenFree,
       spoonacularID: rec.id,
       image: rec.image,
@@ -38,17 +37,19 @@ module.exports = {
       veryHealthy: rec.veryHealthy,
       veryPopular: rec.veryPopular
     })
+  },
+  addInstructions: function(object){
+    var steps = object.id
+    var spoonId = JSON.parse(object.originalID)
+    var instructions = []
+    for (var i = 1; i < steps.length; i++) {
+      var thisStep = JSON.parse(steps[i])
+      instructions.push(thisStep.step)
+    }
+    return knex('recipe').where({
+      spoonacularID: spoonId.id}).update({
+      extendedInstructions: JSON.stringify(instructions)
+    })
   }
 
 };
-
-//
-// addBook: function(newBook){
-//   return knex('book').returning('id')
-//   .insert({
-//     title: newBook.title,
-//     genre_id: newBook.genre_id,
-//     description: newBook.description,
-//     cover_url: newBook.cover_url
-//   });
-// },
