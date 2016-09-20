@@ -28,12 +28,20 @@ router.post('/addInstructions', function(req, res, next){
   })
 })
 
-
 router.get('/:id', function(req, res, next){
   // console.log(req.params);
   db.getSavedRecipe(req.params.id)
   .then(function(data){
     res.json(data)
+  })
+})
+
+router.post('/add-note/:id', function(req, res, next){
+  var steps = req.query
+  console.log(req.query);
+  db.addNote(req.query.query, req.params.id)
+  .then(function(){
+    res.json("notes!")
   })
 })
 

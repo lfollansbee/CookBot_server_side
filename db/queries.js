@@ -53,6 +53,12 @@ module.exports = {
   },
   deleteSavedRecipe: function(id){
     return knex('recipe').where({dbID: id}).del()
+  },
+  addNote: function(note, id){
+    return knex('recipe').where({dbID: id})
+    .update({
+      notes: note
+    })
   }
 
 };
