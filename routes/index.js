@@ -110,13 +110,5 @@ router.get('/search/fridge', function(req, res, next){
   });
 })
 
-// router.get('/saved', function(req, res, next){
-//   console.log("hello");
-//   db.getSavedRecipes()
-//   .then(function(data){
-//     // console.log(data);
-//     res.json(data)
-//   })
-// })
 
 module.exports = router;

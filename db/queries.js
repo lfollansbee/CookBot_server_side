@@ -50,6 +50,9 @@ module.exports = {
       spoonacularID: spoonId.id}).update({
       extendedInstructions: JSON.stringify(instructions)
     })
+  },
+  deleteSavedRecipe: function(id){
+    return knex('recipe').where({dbID: id}).del()
   }
 
 };
