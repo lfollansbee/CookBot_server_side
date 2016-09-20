@@ -9,6 +9,7 @@ var watson = require('watson-developer-cloud');
 
 var routes = require('./routes/index');
 var speech = require('./routes/speech');
+var saved = require('./routes/saved');
 
 var app = express();
 
@@ -27,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 app.use('/', routes);
 app.use('/speech', speech);
+app.use('/saved', saved);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
