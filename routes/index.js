@@ -8,13 +8,12 @@ var db = require('../db/queries');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.json({
-    message: 'Very Nice!'
+    message: 'Recipe Cookbook'
   });
 });
 
 //SEARCH for recipes
 router.get('/search', function(req, res, next){
-  // console.log(req.query);
   var options = {
     method: 'GET',
     url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search',
@@ -26,7 +25,6 @@ router.get('/search', function(req, res, next){
   };
   request(options, function (error, response, body) {
     if (error) throw new Error(error);
-    // console.log(body);
     if(!error && response.statusCode == 200){
       var parsed = JSON.parse(body);
       res.json(parsed);
@@ -38,7 +36,6 @@ router.get('/search', function(req, res, next){
 
 router.get('/recipeId', function(req, res, next){
   var query = parseInt(req.query.id)
-  // console.log("id: ", query);
   var recipeRequest = {
     method: 'GET',
     url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/' + query + '/information',
@@ -81,13 +78,14 @@ router.get('/recipeInstructions', function(req, res, next){
     if(!error && response.statusCode == 200){
       var parsed = JSON.parse(body);
       res.json(parsed);
+    }else{
+      res.json({error, response})
     }
   });
 })
 
 router.get('/search/fridge', function(req, res, next){
   var strings = JSON.stringify(req.query.query)
-  // console.log(strings);
   var options = {
     method: 'GET',
     url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients',
@@ -102,10 +100,11 @@ router.get('/search/fridge', function(req, res, next){
   };
   request(options, function (error, response, body) {
     if (error) throw new Error(error);
-    // console.log(body);
     if(!error && response.statusCode == 200){
       var parsed = JSON.parse(body);
       res.json(parsed);
+    }else{
+      res.json({error, response})
     }
   });
 })

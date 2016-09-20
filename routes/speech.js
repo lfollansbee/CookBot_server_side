@@ -7,7 +7,6 @@ var fs = require('fs');
 
 
 router.get('/:text', function(req, res, next){
-  // console.log("request: ", req.params);
   var text = req.params.text;
   var text_to_speech = watson.text_to_speech({
     username: process.env.WATSON_USERNAME,
