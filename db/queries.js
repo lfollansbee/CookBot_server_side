@@ -10,6 +10,10 @@ module.exports = {
     return knex('recipe').select().where({dbID: id}).first()
   },
 
+  getRecipeNotes: function(recipeId){
+    return knex('note').select('note').where({recipe_id: recipeId})
+  },
+
   addNewRecipe: function(recipe){
     var rec = JSON.parse(recipe.id)
     var ingredients = []
@@ -54,11 +58,10 @@ module.exports = {
   deleteSavedRecipe: function(id){
     return knex('recipe').where({dbID: id}).del()
   },
-  addNote: function(note, id){
-    return knex('recipe').where({dbID: id})
-    .update({
-      notes: note
+  addNote: function(note, recipeId){
+    return knex('note').insert({
+      note: note,
+      recipe_id: recipeId
     })
   }
-
 };

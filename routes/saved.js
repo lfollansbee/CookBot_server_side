@@ -28,8 +28,10 @@ router.post('/addInstructions', function(req, res, next){
 })
 
 router.get('/:id', function(req, res, next){
-  db.getSavedRecipe(req.params.id)
-  .then(function(data){
+  Promise.all([
+    db.getSavedRecipe(req.params.id),
+    db.getRecipeNotes(req.params.id)
+  ]).then(function(data){
     res.json(data)
   })
 })
