@@ -37,7 +37,6 @@ router.get('/:id', function(req, res, next){
 })
 
 router.post('/add-note/:id', function(req, res, next){
-  var steps = req.query
   db.addNote(req.query.query, req.params.id)
   .then(function(){
     res.json("notes!")

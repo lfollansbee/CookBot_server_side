@@ -11,7 +11,7 @@ module.exports = {
   },
 
   getRecipeNotes: function(recipeId){
-    return knex('note').select('note').where({recipe_id: recipeId})
+    return knex('note').select().where({recipe_id: recipeId})
   },
 
   addNewRecipe: function(recipe){
