@@ -43,11 +43,20 @@ router.post('/add-note/:id', function(req, res, next){
   })
 })
 
+// router.get('/delete-note', function(req, res, next){
+//   console.log("Hello");
+//   db.deleteRecipeNote(req.query.query)
+//   .then(function(){
+//     res.json("deleted note")
+//   })
+// })
+
 router.get('/delete/:id', function(req, res, next){
    db.deleteSavedRecipe(req.params.id)
   .then(function(){
     res.json("deleted")
   })
 })
+//should respond with status code of 204 - no content!
 
 module.exports = router;
