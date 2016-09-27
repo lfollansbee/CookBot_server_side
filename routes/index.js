@@ -6,14 +6,14 @@ var db = require('../db/queries');
 
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
   res.json({
     message: 'Recipe Cookbook'
   });
 });
 
 //SEARCH for recipes
-router.get('/search', function(req, res, next){
+router.get('/search', function(req, res){
   var options = {
     method: 'GET',
     url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search',
@@ -34,7 +34,7 @@ router.get('/search', function(req, res, next){
   });
 })
 
-router.get('/recipeId', function(req, res, next){
+router.get('/recipeId', function(req, res){
   var query = parseInt(req.query.id)
   var recipeRequest = {
     method: 'GET',
@@ -63,7 +63,7 @@ router.get('/recipeId', function(req, res, next){
   });
 })
 
-router.get('/recipeInstructions', function(req, res, next){
+router.get('/recipeInstructions', function(req, res){
   var query = parseInt(req.query.id)
   var recipeInstructions = {
     method: 'GET',
@@ -84,7 +84,7 @@ router.get('/recipeInstructions', function(req, res, next){
   });
 })
 
-router.get('/search/fridge', function(req, res, next){
+router.get('/search/fridge', function(req, res){
   var strings = JSON.stringify(req.query.query)
   var options = {
     method: 'GET',
