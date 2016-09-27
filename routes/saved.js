@@ -43,13 +43,12 @@ router.post('/add-note/:id', function(req, res, next){
   })
 })
 
-// router.get('/delete-note', function(req, res, next){
-//   console.log("Hello");
-//   db.deleteRecipeNote(req.query.query)
-//   .then(function(){
-//     res.json("deleted note")
-//   })
-// })
+router.get('/delete-note/:id', function(req, res, next){
+  db.deleteRecipeNote(req.query.query)
+  .then(function(){
+    res.json("note deleted")
+  })
+})
 
 router.get('/delete/:id', function(req, res, next){
    db.deleteSavedRecipe(req.params.id)

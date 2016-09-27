@@ -63,8 +63,8 @@ module.exports = {
       note: note,
       recipe_id: recipeId
     })
+  },
+  deleteRecipeNote: function(noteId){
+    return knex('note').where({id: noteId}).del()
   }
-  // deleteRecipeNote: function(noteId){
-  //   return knex('note').where({id: noteId}).del()
-  // }
 };
